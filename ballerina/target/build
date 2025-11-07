@@ -1,0 +1,88 @@
+{
+  "last_build_time": 1762503452100,
+  "last_update_time": 1762503452100,
+  "last_bal_toml_update_time": 1762503038747,
+  "distribution_version": "2201.13.0-20251106-001000-d3a88c39",
+  "last_modified_time": {
+    "apple.music": 1762503446449
+  },
+  "last_build_options": {
+    "compilationOptions": {
+      "observabilityIncluded": true,
+      "dumpBir": false,
+      "cloud": "",
+      "dumpGraph": false,
+      "dumpRawGraphs": false
+    }
+  },
+  "src_meta_info": [
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/types.bal",
+      "hash": "089ce09ead616d7c70473d13f75e673a4b252835cc501d8c05b6f4893e406434",
+      "size": 37820,
+      "lastModifiedTime": 1762503121019
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/utils.bal",
+      "hash": "828a2e0773c7986250a2a3e0656e87ef03b5f08a6d4a0240c910a91b2cf8f43e",
+      "size": 7979,
+      "lastModifiedTime": 1762503121018
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/Ballerina.toml",
+      "hash": "ea09d6f90100428fb6656bbce15b32cfac7e55d5a1c753fae46f8d080eddb382",
+      "size": 375,
+      "lastModifiedTime": 1762503038747
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/client.bal",
+      "hash": "e6e34aeaa4dd4faa3f056d1d2a242e1e6f7a53ff5988aef9822a671a06b793f6",
+      "size": 27634,
+      "lastModifiedTime": 1762503121018
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/modules/mock.server/types.bal",
+      "hash": "47a7fa8295ea7e9b9b0c135e438a4500a960fba6f4600dfb5b7a317a9023f1f3",
+      "size": 39204,
+      "lastModifiedTime": 1762503247937
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/modules/mock.server/utils.bal",
+      "hash": "f878df9462bf9d508da310a1cf91c43b2c4583db3215e94bf17e275a8aaf7d83",
+      "size": 7964,
+      "lastModifiedTime": 1762503247935
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/modules/mock.server/mock_server.bal",
+      "hash": "dd3bd729647439eccfa8760a21944e3f9e048599f0f6c79a82bc0c863ea155a2",
+      "size": 56975,
+      "lastModifiedTime": 1762503389906
+    }
+  ],
+  "target_exec_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/target/backup/bin/apple.music.jar",
+    "hash": "eb42de0710cacd7b9ca1d9a985504a37ed80abd31bff2a7b5544511c8ef568c9",
+    "size": 47881806,
+    "lastModifiedTime": 1762503452977
+  },
+  "settings_meta_info": {
+    "file": "/home/runner/.ballerina/Settings.toml",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "lastModifiedTime": 1762503061683
+  },
+  "ballerina_toml_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/Ballerina.toml",
+    "hash": "ea09d6f90100428fb6656bbce15b32cfac7e55d5a1c753fae46f8d080eddb382",
+    "size": 375,
+    "lastModifiedTime": 1762503038747
+  },
+  "imports": [
+    "ballerina/constraint",
+    "ballerina/data.jsondata",
+    "ballerina/http",
+    "ballerina/url",
+    "ballerina/os",
+    "ballerina/test"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "last_build_time": 1762503244351,
+  "last_update_time": 1762503244351,
+  "last_bal_toml_update_time": 1762503230981,
+  "distribution_version": "2201.13.0-20251106-001000-d3a88c39",
+  "last_modified_time": {
+    "music_discovery_workflow": 1762503230981
+  },
+  "last_build_options": {
+    "compilationOptions": {
+      "observabilityIncluded": true,
+      "dumpBir": false,
+      "cloud": "",
+      "dumpGraph": false,
+      "dumpRawGraphs": false
+    }
+  },
+  "src_meta_info": [
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-discovery-workflow/Ballerina.toml",
+      "hash": "7d5fd1af412a9532c9aaa4a5309fe11d27778ea52e0a824bdc901a943864df20",
+      "size": 243,
+      "lastModifiedTime": 1762503230981
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-discovery-workflow/main.bal",
+      "hash": "4823638cfdb0618bfc439c0c5a88c7a433108d5035c76f89c21f7758b48303fb",
+      "size": 4402,
+      "lastModifiedTime": 1762503230981
+    }
+  ],
+  "target_exec_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-discovery-workflow/target/backup/bin/music_discovery_workflow.jar",
+    "hash": "43eb759fbb8fec97251b099be0ea3bda24280b5808a78dc11763cff5593f8a05",
+    "size": 46852934,
+    "lastModifiedTime": 1762503245361
+  },
+  "settings_meta_info": {
+    "file": "/home/runner/.ballerina/Settings.toml",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "lastModifiedTime": 1762503061683
+  },
+  "ballerina_toml_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-discovery-workflow/Ballerina.toml",
+    "hash": "7d5fd1af412a9532c9aaa4a5309fe11d27778ea52e0a824bdc901a943864df20",
+    "size": 243,
+    "lastModifiedTime": 1762503230981
+  },
+  "imports": [
+    "ballerina/io",
+    "ballerinax/apple.music"
+  ]
+}

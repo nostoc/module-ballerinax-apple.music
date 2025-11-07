@@ -1,0 +1,54 @@
+{
+  "last_build_time": 1762503205633,
+  "last_update_time": 1762503205633,
+  "last_bal_toml_update_time": 1762503152597,
+  "distribution_version": "2201.13.0-20251106-001000-d3a88c39",
+  "last_modified_time": {
+    "music_artist_discovery": 1762503202291
+  },
+  "last_build_options": {
+    "compilationOptions": {
+      "observabilityIncluded": true,
+      "dumpBir": false,
+      "cloud": "",
+      "dumpGraph": false,
+      "dumpRawGraphs": false
+    }
+  },
+  "src_meta_info": [
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-artist-discovery/Ballerina.toml",
+      "hash": "5c2cdd1b89c51ae568b6807ffe6c1de14157340e82c10d63c7916eb9ea265bd5",
+      "size": 241,
+      "lastModifiedTime": 1762503152597
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-artist-discovery/main.bal",
+      "hash": "9c76f04c4d6075a608aa3e14a500bb8e7b3c0a47af9075c4a3bfc59b4ac0535f",
+      "size": 3093,
+      "lastModifiedTime": 1762503202291
+    }
+  ],
+  "target_exec_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-artist-discovery/target/backup/bin/music_artist_discovery.jar",
+    "hash": "ba286be8ce217e92935337fc47213e2582ffc152629976adc0a9006f841f3e5d",
+    "size": 46847165,
+    "lastModifiedTime": 1762503206534
+  },
+  "settings_meta_info": {
+    "file": "/home/runner/.ballerina/Settings.toml",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "lastModifiedTime": 1762503061683
+  },
+  "ballerina_toml_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-artist-discovery/Ballerina.toml",
+    "hash": "5c2cdd1b89c51ae568b6807ffe6c1de14157340e82c10d63c7916eb9ea265bd5",
+    "size": 241,
+    "lastModifiedTime": 1762503152597
+  },
+  "imports": [
+    "ballerinax/apple.music",
+    "ballerina/io"
+  ]
+}
