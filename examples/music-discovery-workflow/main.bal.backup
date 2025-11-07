@@ -1,0 +1,96 @@
+import ballerina/io;
+import ballerinax/apple.music;
+
+configurable string appleTeamId = ?;
+configurable string keyId = ?;
+configurable string privateKey = ?;
+configurable string storefront = "us";
+
+public function main() returns error? {
+    
+    music:ApiKeysConfig apiKeyConfig = {
+        authorization: {
+            teamId: appleTeamId,
+            keyId: keyId,
+            privateKey: privateKey
+        },
+        musicUserToken: ""
+    };
+    
+    music:Client appleMusic = check new(apiKeyConfig = apiKeyConfig);
+    
+    io:println("=== Music Discovery Workflow ===\n");
+    
+    // Step 1: Search for an artist the user is interested in
+    io:println("Step 1: Searching for artist 'Taylor Swift'...");
+    music:SearchResponse searchResult = check appleMusic->/catalog/[storefront]/search(queries = {
+        term: "Taylor+Swift",
+        types: ["artists"],
+        'limit: 1
+    });
+    
+    music:ArtistsResponse? artistsResponse = searchResult.results.artists;
+    if artistsResponse is () || artistsResponse.data.length() == 0 {
+        return error("No artists found in search results");
+    }
+    
+    music:Artists targetArtist = artistsResponse.data[0];
+    io:println("Found artist: " + (targetArtist.attributes?.name ?: "Unknown"));
+    io:println("Artist ID: " + targetArtist.id + "\n");
+    
+    // Step 2: Get the artist's top songs for discovery
+    io:println("Step 2: Retrieving top songs for the artist...");
+    music:AlbumsResponse topSongsResponse = check appleMusic->/catalog/[storefront]/artists/[targetArtist.id]/view/["top-songs"](queries = {
+        'limit: 5
+    });
+    
+    io:println("Found " + topSongsResponse.data.length().toString() + " top songs/albums");
+    string[] songIds = [];
+    foreach music:Albums album in topSongsResponse.data {
+        songIds.push(album.id);
+        io:println("- " + (album.attributes?.name ?: "Unknown Album") + " (ID: " + album.id + ")");
+    }
+    io:println();
+    
+    // Step 3: Discover similar artists
+    io:println("Step 3: Finding similar artists for music discovery...");
+    music:AlbumsResponse|error similarArtistsResult = appleMusic->/catalog/[storefront]/artists/[targetArtist.id]/view/["similar-artists"](queries = {
+        'limit: 3
+    });
+    
+    if similarArtistsResult is music:AlbumsResponse {
+        io:println("Found " + similarArtistsResult.data.length().toString() + " similar artists:");
+        foreach music:Albums similarArtist in similarArtistsResult.data {
+            io:println("- Similar artist: " + (similarArtist.attributes?.name ?: "Unknown") + " (ID: " + similarArtist.id + ")");
+        }
+    } else {
+        io:println("Could not retrieve similar artists: " + similarArtistsResult.message());
+    }
+    io:println();
+    
+    // Step 4: Add discovered content to user's library
+    io:println("Step 4: Adding discovered songs to user's personal library...");
+    if songIds.length() > 0 {
+        music:AddToLibraryQueriesIdsItemsString[] libraryIds = [];
+        foreach string songId in songIds {
+            libraryIds.push(songId);
+        }
+        
+        error? addToLibraryResult = appleMusic->/me/library.post(queries = {
+            ids: libraryIds
+        });
+        
+        if addToLibraryResult is error {
+            io:println("Note: Could not add to personal library (requires user authentication): " + addToLibraryResult.message());
+        } else {
+            io:println("Successfully added " + songIds.length().toString() + " items to user's library!");
+        }
+    }
+    
+    io:println("\n=== Music Discovery Workflow Complete ===");
+    io:println("Workflow Summary:");
+    io:println("1. ✓ Searched and found target artist");
+    io:println("2. ✓ Retrieved top songs for personalization");
+    io:println("3. ✓ Discovered similar artists for recommendations");
+    io:println("4. ✓ Attempted to add content to user library");
+}

@@ -1,0 +1,97 @@
+import ballerina/io;
+import ballerinax/apple.music;
+
+configurable string developerToken = "";
+configurable string userToken = "";
+
+public function main() returns error? {
+    music:Client appleMusicClient = check new ({
+        authorization: developerToken,
+        musicUserToken: userToken
+    });
+
+    string storefront = "us";
+    string albumId = "1440857781";
+
+    io:println("=== Album Discovery Feature Demo ===\n");
+
+    io:println("Step 1: Fetching album details...");
+    music:AlbumsResponse albumResponse = check appleMusicClient->/catalog/[storefront]/albums/[albumId].get(
+        include = ["artists", "tracks"],
+        views = ["related-albums", "related-videos"]
+    );
+
+    if albumResponse.data.length() > 0 {
+        music:Albums album = albumResponse.data[0];
+        io:println(string `Found album: ${album.id}`);
+        
+        if album.attributes is music:AlbumsAttributes {
+            music:AlbumsAttributes attrs = <music:AlbumsAttributes>album.attributes;
+            string releaseDate = attrs.releaseDate ?: "Unknown";
+            io:println(string `Release Date: ${releaseDate}`);
+            io:println(string `Genres: ${string:'join(", ", ...attrs.genreNames)}`);
+            io:println(string `Apple Digital Master: ${attrs.isMasteredForItunes.toString()}`);
+        }
+    }
+
+    io:println("\nStep 2: Fetching associated artists...");
+    music:ArtistsResponse artistsResponse = check appleMusicClient->/catalog/[storefront]/albums/[albumId]/artists.get(
+        'limit = 10,
+        include = ["albums"]
+    );
+
+    io:println(string `Found ${artistsResponse.data.length()} associated artists:`);
+    foreach music:Artists artist in artistsResponse.data {
+        io:println(string `- Artist ID: ${artist.id}`);
+        if artist.relationships is record {} {
+            io:println("  Has additional relationship data available");
+        }
+    }
+
+    io:println("\nStep 3: Fetching related albums for discovery...");
+    music:AlbumsResponse relatedAlbumsResponse = check appleMusicClient->/catalog/[storefront]/albums/[albumId]/view/["related-albums"].get(
+        'limit = 15,
+        include = ["artists"],
+        'with = ["attributes"]
+    );
+
+    io:println(string `Found ${relatedAlbumsResponse.data.length()} related albums for recommendation:`);
+    foreach music:Albums relatedAlbum in relatedAlbumsResponse.data {
+        io:println(string `- Related Album ID: ${relatedAlbum.id}`);
+        if relatedAlbum.attributes is music:AlbumsAttributes {
+            music:AlbumsAttributes attrs = <music:AlbumsAttributes>relatedAlbum.attributes;
+            string albumName = attrs.name ?: "Unknown";
+            io:println(string `  Album: ${albumName}`);
+            io:println(string `  Genres: ${string:'join(", ", ...attrs.genreNames)}`);
+        }
+    }
+
+    io:println("\nStep 4: Fetching related videos for enhanced discovery...");
+    music:MusicVideosResponse relatedVideosResponse = check appleMusicClient->/catalog/[storefront]/albums/[albumId]/view/["related-videos"].get(
+        'limit = 10,
+        include = ["artists"],
+        'with = ["attributes", "topResults"]
+    );
+
+    io:println(string `Found ${relatedVideosResponse.data.length()} related videos:`);
+    foreach music:MusicVideos video in relatedVideosResponse.data {
+        io:println(string `- Video ID: ${video.id}`);
+        if video.attributes is music:MusicVideosAttributes {
+            music:MusicVideosAttributes attrs = <music:MusicVideosAttributes>video.attributes;
+            int trackNumber = attrs.trackNumber ?: 0;
+            io:println(string `  Track Number: ${trackNumber.toString()}`);
+            string videoSubType = attrs.videoSubType ?: "Standard";
+            io:println(string `  Video Type: ${videoSubType}`);
+            if attrs.durationInMillis > 0 {
+                int totalSeconds = attrs.durationInMillis / 1000;
+                int minutes = totalSeconds / 60;
+                int seconds = totalSeconds % 60;
+                io:println(string `  Duration: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
+            }
+        }
+    }
+
+    io:println("\n=== Album Discovery Complete ===");
+    io:println("The app now has comprehensive album information, artist context,");
+    io:println("related albums for recommendations, and related videos for enhanced user experience.");
+}
