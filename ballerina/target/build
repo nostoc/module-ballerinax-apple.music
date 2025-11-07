@@ -1,0 +1,51 @@
+{
+  "last_build_time": 1762496942712,
+  "last_update_time": 1762496942712,
+  "last_bal_toml_update_time": 1762496854820,
+  "distribution_version": "2201.13.0-20251106-001000-d3a88c39",
+  "last_modified_time": {
+    "apple.music": 1762496854820
+  },
+  "last_build_options": {
+    "compilationOptions": {
+      "observabilityIncluded": true,
+      "dumpBir": false,
+      "cloud": "",
+      "dumpGraph": false,
+      "dumpRawGraphs": false
+    }
+  },
+  "src_meta_info": [
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/Ballerina.toml",
+      "hash": "ea09d6f90100428fb6656bbce15b32cfac7e55d5a1c753fae46f8d080eddb382",
+      "size": 375,
+      "lastModifiedTime": 1762496854820
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/client.bal",
+      "hash": "0f0caad6c8fb3657704d4184c5ea29d79c3b036bab5d0234158836ee3ba29a52",
+      "size": 644,
+      "lastModifiedTime": 1762496854820
+    }
+  ],
+  "target_exec_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/target/backup/bin/apple.music.jar",
+    "hash": "8bb503d8a4b3a06b71825911bb8a6181d17db6fd2ea9076d71b2fe1f76562c3c",
+    "size": 10200809,
+    "lastModifiedTime": 1762496943163
+  },
+  "settings_meta_info": {
+    "file": "/home/runner/.ballerina/Settings.toml",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "lastModifiedTime": 1762496880988
+  },
+  "ballerina_toml_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/ballerina/Ballerina.toml",
+    "hash": "ea09d6f90100428fb6656bbce15b32cfac7e55d5a1c753fae46f8d080eddb382",
+    "size": 375,
+    "lastModifiedTime": 1762496854820
+  },
+  "imports": []
+}
