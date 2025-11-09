@@ -1,0 +1,130 @@
+import ballerina/io;
+import ballerinax/apple.music;
+
+configurable string developerToken = "";
+configurable string keyId = "";
+configurable string teamId = "";
+configurable string privateKey = "";
+
+public function main() returns error? {
+    
+    music:Client appleMusic = check new ({
+        authorization: developerToken,
+        musicUserToken: ""
+    });
+
+    string storefront = "us";
+    string targetGenre = "pop";
+    
+    io:println("=== Music Recommendation Engine ===");
+    io:println("Searching for trending artists in genre: " + targetGenre);
+    
+    "artists"[] searchTypes = ["artists"];
+    music:SearchResponse searchResults = check appleMusic->/catalog/[storefront]/search(
+        term = targetGenre + "+trending",
+        types = searchTypes,
+        'limit = 10
+    );
+    
+    music:ArtistsResponse? artistsResult = searchResults.results.artists;
+    if artistsResult is () {
+        io:println("No artists found for the search term");
+        return;
+    }
+    
+    music:Artists[] artistsData = artistsResult.data;
+    if artistsData.length() == 0 {
+        io:println("No artists found for the search term");
+        return;
+    }
+    
+    io:println(string `Found ${artistsData.length()} trending artists`);
+    
+    string[] recommendations = [];
+    
+    foreach music:Artists artist in artistsData.slice(0, 3) {
+        music:ArtistsAttributes? artistAttrs = artist.attributes;
+        string artistName = "Unknown Artist";
+        if artistAttrs is music:ArtistsAttributes {
+            string? nameValue = artistAttrs.name;
+            if nameValue is string {
+                artistName = nameValue;
+            }
+        }
+        
+        io:println("\n--- Analyzing artist: " + artistName + " ---");
+        
+        music:AlbumsResponse|error topSongsResult = appleMusic->/catalog/[storefront]/artists/[artist.id]/view/["top-songs"](
+            'limit = 5
+        );
+        
+        if topSongsResult is music:AlbumsResponse {
+            io:println(string `Retrieved ${topSongsResult.data.length()} top albums`);
+            
+            foreach music:Albums album in topSongsResult.data {
+                music:AlbumsAttributes? albumAttrs = album.attributes;
+                if albumAttrs is music:AlbumsAttributes {
+                    string? albumName = albumAttrs.name;
+                    string displayName = "Unknown Album";
+                    if albumName is string {
+                        displayName = albumName;
+                    }
+                    io:println("  - Album: " + displayName);
+                    
+                    string[]? genreNames = albumAttrs.genreNames;
+                    if genreNames is string[] {
+                        io:println("    Genres: " + genreNames.toString());
+                    }
+                    
+                    string? releaseDate = albumAttrs.releaseDate;
+                    string displayDate = "Unknown";
+                    if releaseDate is string {
+                        displayDate = releaseDate;
+                    }
+                    io:println("    Release Date: " + displayDate);
+                }
+            }
+        }
+        
+        music:AlbumsResponse|error similarArtistsResult = appleMusic->/catalog/[storefront]/artists/[artist.id]/view/["similar-artists"](
+            'limit = 3
+        );
+        
+        if similarArtistsResult is music:AlbumsResponse {
+            io:println(string `Found ${similarArtistsResult.data.length()} similar items`);
+            
+            foreach music:Albums similarItem in similarArtistsResult.data {
+                music:AlbumsAttributes? similarAttrs = similarItem.attributes;
+                if similarAttrs is music:AlbumsAttributes {
+                    string? similarName = similarAttrs.name;
+                    string displaySimilarName = "Unknown Item";
+                    if similarName is string {
+                        displaySimilarName = similarName;
+                        recommendations.push(displaySimilarName);
+                    }
+                    io:println("  - Similar item: " + displaySimilarName);
+                }
+            }
+        }
+    }
+    
+    io:println("\n=== Personalized Playlist Recommendations ===");
+    io:println("Based on musical pattern analysis, recommended items for your playlist:");
+    
+    string[] uniqueRecommendations = [];
+    foreach string rec in recommendations {
+        int? foundIndex = uniqueRecommendations.indexOf(rec);
+        if foundIndex is () {
+            uniqueRecommendations.push(rec);
+        }
+    }
+    
+    int counter = 1;
+    foreach string recommendation in uniqueRecommendations {
+        io:println(string `${counter}. ${recommendation}`);
+        counter += 1;
+    }
+    
+    io:println(string `\nTotal unique recommendations: ${uniqueRecommendations.length()}`);
+    io:println("Music recommendation engine analysis complete!");
+}

@@ -1,0 +1,54 @@
+{
+  "last_build_time": 1762704768834,
+  "last_update_time": 1762704768834,
+  "last_bal_toml_update_time": 1762704709238,
+  "distribution_version": "2201.13.0-20251106-001000-d3a88c39",
+  "last_modified_time": {
+    "music_recommendation_engine": 1762704765712
+  },
+  "last_build_options": {
+    "compilationOptions": {
+      "observabilityIncluded": true,
+      "dumpBir": false,
+      "cloud": "",
+      "dumpGraph": false,
+      "dumpRawGraphs": false
+    }
+  },
+  "src_meta_info": [
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-recommendation-engine/Ballerina.toml",
+      "hash": "b3e33eab11f70919f1c9804da7e16308eaa9dfc12982cab68a06eaa298c5cdfd",
+      "size": 246,
+      "lastModifiedTime": 1762704709238
+    },
+    {
+      "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-recommendation-engine/main.bal",
+      "hash": "3df541454706d2776b96493cb97a988966d65d50e67c2637cc18bb5de8db7985",
+      "size": 4908,
+      "lastModifiedTime": 1762704765712
+    }
+  ],
+  "target_exec_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-recommendation-engine/target/backup/bin/music_recommendation_engine.jar",
+    "hash": "f8d80433864e168976157e219776cc9e3babc2dfa334ad59507ace994f49fae5",
+    "size": 46840380,
+    "lastModifiedTime": 1762704769904
+  },
+  "settings_meta_info": {
+    "file": "/home/runner/.ballerina/Settings.toml",
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "lastModifiedTime": 1762704622299
+  },
+  "ballerina_toml_meta_info": {
+    "file": "/home/runner/work/module-ballerinax-apple.music/module-ballerinax-apple.music/examples/music-recommendation-engine/Ballerina.toml",
+    "hash": "b3e33eab11f70919f1c9804da7e16308eaa9dfc12982cab68a06eaa298c5cdfd",
+    "size": 246,
+    "lastModifiedTime": 1762704709238
+  },
+  "imports": [
+    "ballerina/io",
+    "ballerinax/apple.music"
+  ]
+}
