@@ -1,3 +1,4 @@
+
 # Ballerina apple.music connector
 
 [![Build](https://github.com/ballerina-platform/module-ballerinax-apple.music/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-apple.music/actions/workflows/ci.yml)
@@ -8,22 +9,72 @@
 
 ## Overview
 
-[//]: # (TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details.)
+[Apple Music](https://www.apple.com/apple-music/) is a music and video streaming service developed by Apple Inc., offering users access to over 100 million songs, curated playlists, and exclusive content across all their devices.
 
+The `ballerinax/apple.music` package offers APIs to connect and interact with [Apple Music API](https://developer.apple.com/documentation/applemusicapi) endpoints, specifically based on a recent version of the API.
 ## Setup guide
 
-[//]: # (TODO: Add detailed steps to obtain credentials and configure the module.)
+To use the Apple Music connector, you must have access to the Apple Music API through an [Apple Developer account](`https://developer.apple.com/`) and obtain an API access token. If you do not have an Apple ID, you can sign up for one [here](`https://appleid.apple.com/account`).
 
+### Step 1: Create an Apple Developer Account
+
+1. Navigate to the [Apple Developer website](`https://developer.apple.com/`) and sign up for a developer account or log in if you already have one.
+
+2. Ensure you have an active Apple Developer Program membership ($99/year), as the Apple Music API requires enrollment in the Apple Developer Program.
+
+### Step 2: Generate an API Access Token
+
+1. Log in to your Apple Developer account.
+
+2. Navigate to Certificates, Identifiers & Profiles, then select Keys from the sidebar.
+
+3. Click the "+" button to create a new key, provide a name for your key, and check the "MusicKit" checkbox under Key Services.
+
+4. Click Continue, then Register to generate your key. Download the .p8 key file and note your Key ID and Team ID, which you'll need to generate JWT tokens for API authentication.
+
+> **Tip:** You must copy and store this key somewhere safe. It won't be visible again in your account settings for security reasons.
 ## Quickstart
 
-[//]: # (TODO: Add a quickstart guide to demonstrate a basic functionality of the module, including sample code snippets.)
+To use the `apple.music` connector in your Ballerina application, update the `.bal` file as follows:
 
+### Step 1: Import the module
+
+```ballerina
+import ballerinax/apple.music;
+```
+
+### Step 2: Instantiate a new connector
+
+Create an `apple.music:ConnectionConfig` and initialize the client:
+
+```ballerina
+final music:Client appleMusicClient = check new("https://api.music.apple.com/v1");
+```
+
+### Step 3: Invoke the connector operation
+
+Now, utilize the available connector operations.
+
+#### Get multiple catalog albums
+
+```ballerina
+public function main() returns error? {
+    music:AlbumsResponse response = check appleMusicClient->/catalog/["us"]/albums.get({
+        ids: ["1440857781", "1440857782"]
+    });
+}
+```
+
+### Step 4: Run the Ballerina application
+
+```bash
+bal run
+```
 ## Examples
 
-The `apple.music` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-apple.music/tree/main/examples/), covering the following use cases:
+The `apple.music` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-apple.music/tree/main/examples), covering the following use cases:
 
-[//]: # (TODO: Add examples)
-
+1. [Global album availability analysis](https://github.com/ballerina-platform/module-ballerinax-apple.music/tree/main/examples/global-album-availability-analysis) - Demonstrates how to analyze album availability across different global markets using the Apple Music API.
 ## Build from the source
 
 ### Setting up the prerequisites
@@ -33,13 +84,13 @@ The `apple.music` connector provides practical examples illustrating usage in va
     * [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
     * [OpenJDK](https://adoptium.net/)
 
-   > **Note:** After installation, remember to set the `JAVA_HOME` environment variable to the directory where JDK was installed.
+    > **Note:** After installation, remember to set the `JAVA_HOME` environment variable to the directory where JDK was installed.
 
 2. Download and install [Ballerina Swan Lake](https://ballerina.io/).
 
 3. Download and install [Docker](https://www.docker.com/get-started).
 
-   > **Note**: Ensure that the Docker daemon is running before executing any tests.
+    > **Note**: Ensure that the Docker daemon is running before executing any tests.
 
 4. Export Github Personal access token with read package permissions as follows,
 
@@ -54,39 +105,39 @@ Execute the commands below to build from the source.
 
 1. To build the package:
 
-   ```bash
-   ./gradlew clean build
-   ```
+    ```bash
+    ./gradlew clean build
+    ```
 
 2. To run the tests:
 
-   ```bash
-   ./gradlew clean test
-   ```
+    ```bash
+    ./gradlew clean test
+    ```
 
 3. To build the without the tests:
 
-   ```bash
-   ./gradlew clean build -x test
-   ```
+    ```bash
+    ./gradlew clean build -x test
+    ```
 
 4. To run tests against different environments:
 
-   ```bash
-   ./gradlew clean test -Pgroups=<Comma separated groups/test cases>
-   ```
+    ```bash
+    ./gradlew clean test -Pgroups=<Comma separated groups/test cases>
+    ```
 
 5. To debug the package with a remote debugger:
 
-   ```bash
-   ./gradlew clean build -Pdebug=<port>
-   ```
+    ```bash
+    ./gradlew clean build -Pdebug=<port>
+    ```
 
 6. To debug with the Ballerina language:
 
-   ```bash
-   ./gradlew clean build -PbalJavaDebug=<port>
-   ```
+    ```bash
+    ./gradlew clean build -PbalJavaDebug=<port>
+    ```
 
 7. Publish the generated artifacts to the local Ballerina Central repository:
 
@@ -96,9 +147,9 @@ Execute the commands below to build from the source.
 
 8. Publish the generated artifacts to the Ballerina Central repository:
 
-   ```bash
-   ./gradlew clean build -PpublishToCentral=true
-   ```
+    ```bash
+    ./gradlew clean build -PpublishToCentral=true
+    ```
 
 ## Contribute to Ballerina
 
@@ -109,6 +160,7 @@ For more information, go to the [contribution guidelines](https://github.com/bal
 ## Code of conduct
 
 All the contributors are encouraged to read the [Ballerina Code of Conduct](https://ballerina.io/code-of-conduct).
+
 
 ## Useful links
 
