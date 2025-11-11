@@ -1,16 +1,22 @@
 # Examples
 
-The `ballerinax/sendgrid` connector provides practical examples illustrating usage in various scenarios.
+The `apple.music` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-apple.music/tree/main/examples), covering use cases like music library discovery and music discovery recommendations.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. [Music library discovery](https://github.com/ballerina-platform/module-ballerinax-apple.music/tree/main/examples/music-library-discovery) - Discover and explore music content within a user's personal Apple Music library.
+
+2. [Music discovery recommendations](https://github.com/ballerina-platform/module-ballerinax-apple.music/tree/main/examples/music-discovery-recommendations) - Generate personalized music recommendations based on user preferences and listening history.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. Generate Apple Music credentials to authenticate the connector as described in the [Setup guide](https://central.ballerina.io/ballerinax/apple.music/latest#setup-guide).
 
-## Running an example
+2. For each example, create a `Config.toml` file the related configuration. Here's an example of how your `Config.toml` file should look:
+
+    ```toml
+    token = "<Access Token>"
+    ```
+
+## Running an Example
 
 Execute the following commands to build an example from the source:
 
@@ -24,22 +30,4 @@ Execute the following commands to build an example from the source:
 
     ```bash
     bal run
-    ```
-
-## Building the examples with the local module
-
-**Warning**: Due to the absence of support for reading local repositories for single Ballerina files, the Bala of the module is manually written to the central repository as a workaround. Consequently, the bash script may modify your local Ballerina repositories.
-
-Execute the following commands to build all the examples against the changes you have made to the module locally:
-
-* To build all the examples:
-
-    ```bash
-    ./build.sh build
-    ```
-
-* To run all the examples:
-
-    ```bash
-    ./build.sh run
     ```
